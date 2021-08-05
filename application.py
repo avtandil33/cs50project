@@ -40,12 +40,12 @@ def phe_rez():
         # Get area
         area = request.form.get("area")
         if area == "The World":
-            deals = db.execute("SELECT * FROM fotos GROUP BY CountryEng")
+            deals = db.execute("SELECT * FROM fotos GROUP BY fotos.CountryEng")
         else:
-            deals = db.execute("SELECT * FROM fotos WHERE AreaEng = ? GROUP BY CountryEng", area)
+            deals = db.execute("SELECT * FROM fotos WHERE fotos.AreaEng = ? GROUP BY fotos.CountryEng", area)
         return render_template("phe_filtered.html", deals=deals, area=area)
     else:
-        areas = db.execute("SELECT * FROM fotos GROUP BY AreaEng")
+        areas = db.execute("SELECT * FROM fotos GROUP BY fotos.AreaEng")
         return render_template("phe_rez.html", areas=areas)
 
 
