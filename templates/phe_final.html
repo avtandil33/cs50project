@@ -1,0 +1,35 @@
+{% extends "layoute.html" %}
+
+{% block title %}
+Photo Sessions
+{% endblock %}
+
+
+{% block main %}
+
+<form action="/phe_final" method="post">
+       <div>
+
+           <h2>&nbsp;&nbsp;&nbsp;{{ country }}</h2>
+
+
+    {% for cy in deals1 %}
+
+<p>&nbsp;&nbsp;&nbsp;<a href="http://avtandil.narod.ru/fotki/{{ cy.HrefEng | safe }}">{{ cy.CityEng }} ({{ cy.Visit }})</a></p>
+
+    {% endfor %}
+
+<p></p>
+<p></p>
+
+       </div>
+<hr WIDTH="100%">
+       <div>
+             &nbsp;&nbsp;&nbsp;<button class="btn btn-primary" type="submit">Choose another country</button>
+       </div>
+
+
+
+{% endblock %}
+
+

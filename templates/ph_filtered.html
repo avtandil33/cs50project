@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Фоткосессии
+{% endblock %}
+
+
+{% block main %}
+<p> Выбрана часть света : {{ area }}</p>
+<form action="/ph_filtered" method="post">
+
+       <div class="form-group">
+          <select class="form-control" name="country">
+                <option dissabled selected value="Все страны"></option>
+
+                {% for ar in deals %}
+                <option value="{{ ar.Country }}">{{ ar.Country }}</option>
+                {% endfor %}
+
+          </select>
+
+            &nbsp;&nbsp;&nbsp;<button class="btn btn-primary" type="submit">Выберите страну</button>
+
+       </div>
+</form>
+{% endblock %}
+
+

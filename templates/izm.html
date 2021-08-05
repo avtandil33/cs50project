@@ -1,0 +1,82 @@
+{% extends "layoutec.html" %}
+
+{% block title %}
+Database update
+{% endblock %}
+
+{% block main %}
+
+<h2>Database update</h2>
+
+<a href="/">Click here to finish database editing</a>
+
+<hr>
+
+<form action="/update" method="post">
+
+<h2>To delete city from database:</h2>
+   <div class="form-group">
+          <select class="form-control" name="oldcity">
+                <option selected value="alle">-</option>
+
+                {% for ar in goroda %}
+                <option value="{{ ar.CityEng }}">{{ ar.CityEng }}</option>
+                {% endfor %}
+
+          </select>
+
+        </div>
+
+        <button class="btn btn-primary" type="submit">Delete city from database</button>
+</form>
+
+
+<hr>
+
+<h2>To add a new city:</h2>
+
+<form action="/izm" method="post">
+
+<div class="form-group">
+          <select class="form-control" name="area">
+                <option disabled selected value="The World">English area name</option>
+
+                {% for ar in areas %}
+                <option value="{{ ar.AreaEng }}">{{ ar.AreaEng }}</option>
+                {% endfor %}
+
+            </select>
+</div>
+<div class="form-group">
+<input autocomplete="off" class="form-control" name="country" placeholder="Russian country name" type="text">
+</div>
+<div class="form-group">
+<input autocomplete="off" class="form-control" name="ecountry" placeholder="English country name" type="text">
+</div>
+<div class="form-group">
+<input autocomplete="off" class="form-control" name="terr" placeholder="Russian territory name (if any)" type="text">
+</div>
+<div class="form-group">
+<input autocomplete="off" class="form-control" name="eterr" placeholder="English territory name (if any)" type="text">
+</div>
+<div class="form-group">
+<input autocomplete="off" class="form-control" name="city" placeholder="Russian city name" type="text">
+</div>
+<div class="form-group">
+<input autocomplete="off" class="form-control" name="ecity" placeholder="English city name" type="text">
+</div>
+<div class="form-group">
+<input autocomplete="off" class="form-control" name="visdate" placeholder="Visit date dd/mm/yyyy" type="text">
+</div>
+<div class="form-group">
+<input autocomplete="off" class="form-control" name="visyear" placeholder="Visit year" type="text">
+</div>
+<div class="form-group">
+<input autocomplete="off" class="form-control" name="pagename" placeholder="Page name" type="text">
+</div>
+
+<button class="btn btn-primary" type="submit">Add the city to database</button>
+</form>
+{% endblock %}
+
+

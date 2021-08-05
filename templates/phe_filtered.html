@@ -1,0 +1,28 @@
+{% extends "layoute.html" %}
+
+{% block title %}
+Photo Sessions
+{% endblock %}
+
+
+{% block main %}
+<p> World part chosen : {{ area }}</p>
+<form action="/phe_filtered" method="post">
+
+       <div class="form-group">
+          <select class="form-control" name="country">
+                <option dissabled selected value="All countries"></option>
+
+                {% for ar in deals %}
+                <option value="{{ ar.CountryEng }}">{{ ar.CountryEng }}</option>
+                {% endfor %}
+
+          </select>
+
+            &nbsp;&nbsp;&nbsp;<button class="btn btn-primary" type="submit">Choose country</button>
+
+       </div>
+</form>
+{% endblock %}
+
+

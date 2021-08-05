@@ -1,0 +1,30 @@
+{% extends "layoute.html" %}
+
+{% block title %}
+Photo Sessions
+{% endblock %}
+
+{% block main %}
+<form method="post">
+
+
+   <div class="form-group">
+          <select class="form-control" name="area">
+                <option selected value="The World">The World</option>
+
+                {% for ar in areas %}
+                <option value="{{ ar.AreaEng }}">{{ ar.AreaEng }}</option>
+                {% endfor %}
+
+            </select>
+
+            &nbsp;&nbsp;&nbsp;<button class="btn btn-primary" type="submit">Choose world area</button>
+
+        </div>
+
+
+
+    </form>
+{% endblock %}
+
+

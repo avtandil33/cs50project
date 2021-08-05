@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Фоткосессии
+{% endblock %}
+
+{% block main %}
+<form method="post">
+
+   <div class="form-group">
+          <select class="form-control" name="area">
+                <option selected value="Весь мир">Весь мир</option>
+
+                {% for ar in areas %}
+                <option value="{{ ar.Area }}">{{ ar.Area }}</option>
+                {% endfor %}
+
+            </select>
+
+            &nbsp;&nbsp;&nbsp;<button class="btn btn-primary" type="submit">Выберите часть света</button>
+
+        </div>
+
+
+
+    </form>
+{% endblock %}
+
+
