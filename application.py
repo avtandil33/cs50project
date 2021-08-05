@@ -16,8 +16,8 @@ app = Flask(__name__)
 # db = SQLAlchemy(app)
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///fotki.db")
-
+# db = SQL("sqlite:///fotki.db")
+db = SQL(os.getenv("DATABASE_URL"))
 
 @app.route("/ph_rez", methods=["GET", "POST"])
 def ph_rez():
