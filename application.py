@@ -25,12 +25,12 @@ def ph_rez():
         # Get area
         area = request.form.get("area")
         if area == "Весь мир":
-            deals = db.execute('SELECT "Country" FROM fotos GROUP BY "Country"')
+            deals = db.execute('SELECT "Country" FROM fotos GROUP BY "Country" ORDER BY "Country"')
         else:
             deals = db.execute('SELECT "Country" FROM fotos WHERE "Area" = ? GROUP BY "Country"', area)
         return render_template("ph_filtered.html", deals=deals, area=area)
     else:
-        areas = db.execute('SELECT "Area" FROM fotos GROUP BY "Area"')
+        areas = db.execute('SELECT "Area" FROM fotos GROUP BY "Area" ORDER BY "Area"')
         return render_template("ph_rez.html", areas=areas)
 
 
@@ -40,12 +40,12 @@ def phe_rez():
         # Get area
         area = request.form.get("area")
         if area == "The World":
-            deals = db.execute('SELECT "CountryEng" FROM fotos GROUP BY "CountryEng"')
+            deals = db.execute('SELECT "CountryEng" FROM fotos GROUP BY "CountryEng" ORDER BY "CountryEng"')
         else:
             deals = db.execute('SELECT "CountryEng" FROM fotos WHERE "AreaEng" = ? GROUP BY "CountryEng"', area)
         return render_template("phe_filtered.html", deals=deals, area=area)
     else:
-        areas = db.execute('SELECT "AreaEng" FROM fotos GROUP BY "AreaEng"')
+        areas = db.execute('SELECT "AreaEng" FROM fotos GROUP BY "AreaEng" ORDER BY "AreaEng"')
         return render_template("phe_rez.html", areas=areas)
 
 
@@ -57,7 +57,7 @@ def ph_filtered():
 
         country = request.form.get("country")
         if country == "Все страны":
-            deals1 = db.execute('SELECT "City", "HrefRus", "Visit" FROM fotos GROUP BY "Country"')
+            deals1 = db.execute('SELECT "City", "HrefRus", "Visit" FROM fotos GROUP BY "Country" ORDER BY "Country"')
         else:
             deals1 = db.execute('SELECT "City", "HrefRus", "Visit" FROM fotos WHERE "Country" = ? ORDER BY "City"', country)
         return render_template("ph_final.html", deals1=deals1, country=country)
@@ -75,7 +75,7 @@ def phe_filtered():
 
         country = request.form.get("country")
         if country == "All countries":
-            deals1 = db.execute('SELECT "CityEng", "HrefEng", "Visit" FROM fotos GROUP BY "CountryEng"')
+            deals1 = db.execute('SELECT "CityEng", "HrefEng", "Visit" FROM fotos GROUP BY "CountryEng" ORDER BY "CountryEng"')
         else:
             deals1 = db.execute('SELECT "CityEng", "HrefEng", "Visit" FROM fotos WHERE "CountryEng" = ? ORDER BY "CityEng"', country)
         return render_template("phe_final.html", deals1=deals1, country=country)
