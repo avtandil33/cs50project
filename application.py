@@ -57,9 +57,9 @@ def ph_filtered():
 
         country = request.form.get("country")
         if country == "Все страны":
-            deals1 = db.execute("SELECT City, HrefRus, Visit FROM fotos GROUP BY Country")
+            deals1 = db.execute('SELECT "City", "HrefRus", "Visit" FROM fotos GROUP BY "Country"')
         else:
-            deals1 = db.execute("SELECT City, HrefRus, Visit FROM fotos WHERE Country = ? ORDER BY City", country)
+            deals1 = db.execute('SELECT "City", "HrefRus", "Visit" FROM fotos WHERE "Country" = ? ORDER BY "City"', country)
         return render_template("ph_final.html", deals1=deals1, country=country)
     # else:
         # area=ph_rez(area)
@@ -75,9 +75,9 @@ def phe_filtered():
 
         country = request.form.get("country")
         if country == "All countries":
-            deals1 = db.execute("SELECT CityEng, HrefEng, Visit FROM fotos GROUP BY CountryEng")
+            deals1 = db.execute('SELECT "CityEng", "HrefEng", "Visit" FROM fotos GROUP BY "CountryEng"')
         else:
-            deals1 = db.execute("SELECT CityEng, HrefEng, Visit FROM fotos WHERE CountryEng = ? ORDER BY CityEng", country)
+            deals1 = db.execute('SELECT "CityEng", "HrefEng", "Visit" FROM fotos WHERE "CountryEng" = ? ORDER BY "CityEng"', country)
         return render_template("phe_final.html", deals1=deals1, country=country)
     # else:
         # area=ph_rez(area)
@@ -105,7 +105,7 @@ def phe_final():
 def izm():
     if request.method == "POST":
         earea = request.form.get("area")
-        arii = db.execute("SELECT Area FROM fotos WHERE AreaEng = ?", earea)
+        arii = db.execute('SELECT "Area" FROM fotos WHERE "AreaEng" = ?', earea)
         area = arii[0]['Area']
         country = request.form.get("country")
         ecountry = request.form.get("ecountry")
@@ -118,18 +118,18 @@ def izm():
         pagename = request.form.get("pagename")
 
         try:
-            db.execute("INSERT INTO fotos VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", area, earea, country, ecountry,
+            db.execute('INSERT INTO fotos VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', area, earea, country, ecountry,
                        terr, eterr, city + ' ', ecity + ' ', pagename + '.html', pagename + 'e.html', visdate,  visyear)
             # flash("Chosen city was successfully added to database!")
         except:
             return("It was error while adding...")
 
-        goroda = db.execute("SELECT CityEng, Visit, God FROM fotos WHERE CityEng IS NOT NULL ORDER BY CityEng")
+        goroda = db.execute('SELECT "CityEng", "Visit", "God" FROM fotos WHERE "CityEng" IS NOT NULL ORDER BY "CityEng"')
         return render_template("izm.html", goroda=goroda)
 
     else:
-        areas = db.execute("SELECT AreaEng FROM fotos GROUP BY AreaEng ORDER BY AreaEng")
-        goroda = db.execute("SELECT CityEng, Visit, God FROM fotos WHERE CityEng IS NOT NULL ORDER BY CityEng")
+        areas = db.execute('SELECT "AreaEng" FROM fotos GROUP BY "AreaEng" ORDER BY "AreaEng"')
+        goroda = db.execute('SELECT "CityEng", "Visit", "God" FROM fotos WHERE "CityEng" IS NOT NULL ORDER BY "CityEng"')
         return render_template("izm.html", areas=areas, goroda=goroda)
 
 
@@ -139,16 +139,15 @@ def update():
     if request.method == "POST":
         oldcity = request.form.get("oldcity")
         try:
-            db.execute("DELETE FROM fotos WHERE CityEng = ?", oldcity)
+            db.execute('DELETE FROM fotos WHERE "CityEng" = ?', oldcity)
             # flash("{{ city }} was successfully deleted from database!")
         except:
             return("It was error while deleting...")
 
-        areas = db.execute("SELECT AreaEng FROM fotos GROUP BY AreaEng ORDER BY AreaEng")
-        goroda = db.execute("SELECT CityEng, Visit, God FROM fotos WHERE CityEng IS NOT NULL ORDER BY CityEng")
+        areas = db.execute('SELECT "AreaEng" FROM fotos GROUP BY "AreaEng" ORDER BY "AreaEng"')
+        goroda = db.execute('SELECT "CityEng", "Visit", "God" FROM fotos WHERE "CityEng" IS NOT NULL ORDER BY "CityEng"')
         return render_template("izm.html", areas=areas, goroda=goroda)
     else:
-        areas = db.execute("SELECT AreaEng FROM fotos GROUP BY AreaEng ORDER BY AreaEng")
-        goroda = db.execute("SELECT CityEng, Visit, God FROM fotos WHERE CityEng IS NOT NULL ORDER BY CityEng")
+        areas = db.execute('SELECT "AreaEng" FROM fotos GROUP BY "AreaEng" ORDER BY "AreaEng"')
+        goroda = db.execute('SELECT "CityEng", "Visit", "God" FROM fotos WHERE "CityEng" IS NOT NULL ORDER BY "CityEng"')
         return render_template("izm.html", areas=areas, goroda=goroda)
-
