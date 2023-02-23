@@ -20,6 +20,17 @@ db = SQL("sqlite:///fotki.db")
 def ph_rez():
     if request.method == "POST":
         # Get area
+# Add the below code to query the database
+engine = create_engine(db)
+meta = MetaData()
+conn = engine.connect()
+users = Table('users', meta, autoload=True, autoload_with=engine)
+s = select([users]).where(users.c.username==request.form.get("username"))
+rows = conn.execute(s).fetchall()
+conn.close()
+engine.dispose()
+
+
         area = request.form.get("area")
         if area == "Весь мир":
             deals = db.execute('SELECT "Country" FROM fotos GROUP BY "Country" ORDER BY "Country"')
