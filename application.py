@@ -10,14 +10,11 @@ from werkzeug.exceptions import default_exceptions, HTTPException, InternalServe
 app = Flask(__name__)
 
 # Ensure templates are auto-reloaded
-# app.config["TEMPLATES_AUTO_RELOAD"] = True
-
-# app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///fotki.db'
-# db = SQLAlchemy(app)
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # Configure CS50 Library to use SQLite database
-# db = SQL("sqlite:///fotki.db")
-db = SQL(os.getenv("DATABASE_URL"))
+db = SQL("sqlite:///fotki.db")
+# db = SQL(os.getenv("DATABASE_URL"))
 
 @app.route("/ph_rez", methods=["GET", "POST"])
 def ph_rez():
@@ -91,7 +88,7 @@ def ph_final():
     if request.method == "POST":
         return redirect('/ph_rez')
     else:
-        return redirect('/p')
+        return redirect('/')
 
 
 @app.route("/phe_final", methods=["GET", "POST"])
